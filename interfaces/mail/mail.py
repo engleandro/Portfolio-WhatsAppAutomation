@@ -281,15 +281,13 @@ class Email():
             self.connection.sendmail(
                 self.from_address,
                 self.to_addresses,
-                text)
-            #self.sent_today += 1
-            #self.mongo_interface.update_email_as_sent(to_addresses)
-            #self.mongo_interface.update_count(self.username, self.sent_today)
+                text
+            )
             return {'success': True, 'address': self.to_addresses}
+
         except (smtplib.SMTPRecipientsRefused, UnicodeEncodeError):    # noqa
-            #self.logger.debug(f"Server Refused to send: {to_addresses}")
-            #self.mongo_interface.update_email_status(to_addresses, self.mongo_interface.INVALID)
             return {'success': False, 'address': self.to_addresses}
+
         except Exception as _Error: #noqa
             print(f"Report: {traceback.format_exc()}.")
 
@@ -298,97 +296,3 @@ class Email():
         self.connection.close()
 
 
-## UNIT-TESTING
-
-if __name__ == '__main__':
-    try:
-        email = Email(
-            user="esganadinhoneto",
-            domain="gmail.com",
-            password="Intexfy7799",
-            server=['localhost', 1025])
-        email.create(to_addresses="alves.engleandro@gmail.com", subject="test 1")
-        
-        path = os.getcwd()
-        print(f'path>{path}'); os.chdir('..')
-        print(f'path>{os.getcwd()}'); os.chdir(path)
-
-        email.write_by_template(template='new_list.html')
-
-        email.send()
-        email.finish()
-
-    except Exception as _Error:
-        print(f"Report: {traceback.format_exc()}.")
-
-
-
-
-
-
-
-
-"""
-        #def write_by_template(self, context
-        #self.template = self.template if not template else template
-        #'//'.join(os.path.abspath(__name__).split(r'/')[0:-3].append("//templates"))
-        #if self.template: self.html = open(self.template, 'r')
-        #else: self.html = open('../../../templates/email.html', 'r'
-        # render with jinja
-        #from jinja2 import Template
-        #t = Template("Hello {{ something }}!")
-        #t.render(**self.context)
-"""
-
-
-
-"""
-# SUBPROCESS
-subprocess.run(["ls", "-l"], capture_output=False, shell=False, check=False) # default, not capture output
-subprocess.run(["ls", "-l"], capture_output=True, shell=True, check=True)
-subprocess.run(
-    args,
-    *,
-    stdin=None,
-    input=None,
-    stdout=None,
-    stderr=None,
-    capture_output=False,
-    shell=False,
-    cwd=None,
-    timeout=None, # in seconds
-    check=False,
-    encoding=None,
-    errors=None,
-    text=None,
-    env=None,
-    universal_newlines=None,
-    **other_popen_kwargs)
-# For advance: use the interface subprocess.Popen
-"""
-
-
-
-"""
-def using_ssl():
-    try:
-        server = SMTP_SSL(host='smtp.gmail.com', port=465, context=create_default_context())
-        server.login(sender, password)
-        server.send_message(msg=msg)
-        server.quit()
-        server.close()
-    except SMTPAuthenticationError:
-        print('Login Failed')
-
-def using_tls():
-    try:
-        server = SMTP(host='smtp.gmail.com', port=587)
-        server.starttls(context=create_default_context())
-        server.ehlo()
-        server.login(sender, password)
-        server.send_message(msg=msg)
-        server.quit()
-        server.close()
-    except SMTPAuthenticationError:
-        print('Login Failed')
-"""
