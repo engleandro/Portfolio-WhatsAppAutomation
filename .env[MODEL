@@ -1,0 +1,12 @@
+# [API-SETTINGS]
+DJANGO_SECRET_KEY=your-django-secret-key
+ALLOWED_HOSTS=127.0.0.1
+
+# [MAIL-ACCOUNT-TO-VALIDATION]
+MAIL_VALIDATION_ACCOUNT=your-less-secured-mail
+MAIL_VALIDATION_PASSWORD=your-less-secured-mail-password
+
+# [WHATSAPP-ACCOUNTS]
+WHATSAPP_ACCOUNT=your-whatsapp-account-in-international-format
+
+

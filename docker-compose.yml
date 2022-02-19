@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+
+    webserver:
+        container_name: whatsapp_api
+        build:
+            context: .
+            dockerfile: Dockerfile
+        restart: always
+        env_file:
+            - .env
+        ports:
+            - "80:80"
+        command: gunicorn whatsapp_api.wsgi --bind 0.0.0.0:80 --timeout 500 --workers 2

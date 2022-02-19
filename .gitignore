@@ -127,3 +127,31 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# my ignores
+
+./env
+./venv
+.venv
+.env
+env
+venv
+cookies
+./cookies
+
+index.html
+
+__pycache__
+/*/__pycache__
+/*/*/__pycache__
+/*/*/*/__pycache__
+
+__pycache__/*
+*/__pycache__/*
+*/*/__pycache__/*
+*/*/*/__pycache__/*
+
+files/screenshot.png
+files/last_message.png
+
+db.sqlite3
